@@ -36,7 +36,7 @@ public class GumboLibrary : ModuleRules
         }
         if (isSupportedLibrary)
         {
-            PublicIncludePaths.Add(Path.Combine(ModulePath, "gumbo-parser"));
+            PublicIncludePaths.Add(Path.Combine(ModulePath));
         }
 
         return isSupportedLibrary;
