@@ -3,18 +3,19 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "gumbo-parser/include/gumbo.h"
 
+struct GumboInternalOutput;
+typedef GumboInternalOutput GumboOutput;
 /**
  * 
  */
-class GUMBO_API PureGumbo
+class GUMBO_API FGumboPure
 {
 public:
-	PureGumbo();
-	~PureGumbo();
+	FGumboPure();
+	~FGumboPure();
 
-	void Parse(FString data);
+	void Parse(FString&& data);
 
 	GumboOutput* GumboObject;
 };

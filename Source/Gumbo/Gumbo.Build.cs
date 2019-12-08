@@ -6,7 +6,8 @@ public class Gumbo : ModuleRules
 {
 	public Gumbo(ReadOnlyTargetRules Target) : base(Target)
 	{
-		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
+        OptimizeCode = CodeOptimization.Never;
+        PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 		
 		PublicIncludePaths.AddRange(
 			new string[] {
@@ -26,7 +27,8 @@ public class Gumbo : ModuleRules
 			new string[]
 			{
 				"Core",
-				"GumboLibrary",
+                "CoreUObject",
+                "GumboLibrary",
 				"Projects"
 				// ... add other public dependencies that you statically link with here ...
 			}

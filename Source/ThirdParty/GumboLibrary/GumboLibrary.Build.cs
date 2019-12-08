@@ -8,6 +8,7 @@ public class GumboLibrary : ModuleRules
 {
     public GumboLibrary(ReadOnlyTargetRules Target) : base(Target)
     {
+        OptimizeCode = CodeOptimization.Never;
         Type = ModuleType.External;
 
         LoadGumbo(Target);
