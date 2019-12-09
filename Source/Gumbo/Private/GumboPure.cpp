@@ -6,6 +6,7 @@
 
 FGumboPure::FGumboPure()
 {
+	GumboObject = nullptr;
 }
 
 FGumboPure::~FGumboPure()
@@ -15,7 +16,7 @@ FGumboPure::~FGumboPure()
 	}
 }
 
-void FGumboPure::Parse(FString&& data)
+void FGumboPure::Parse(FString data)
 {
 	const char* data_utf8 = TCHAR_TO_UTF8(*data);
 	GumboObject = gumbo_parse(data_utf8);

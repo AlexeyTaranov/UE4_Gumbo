@@ -3,36 +3,39 @@
 
 #include "GumboObject.h"
 #include "GumboPure.h"
-#include "gumbo-parser/include/gumbo.h"
 
-static const char* GetAttributeValueInNode(GumboNode* node, GumboTag tag, const char* attributeName);
+static GumboAttribute* GetAttributeInNode(GumboNode* node, GumboTag tag, const char* attributeName);
 
-void UGumboObject::Parse(FString&& HTML_Data)
+UGumboObject::UGumboObject()
 {
-	if (!GumboPureObject.IsValid()) 
-	{
-		GumboPureObject = MakeShared<FGumboPure>();
-	}
-	GumboPureObject->Parse(MoveTemp(HTML_Data));
+	GumboPureObject = MakeShared<FGumboPure>();
 }
 
-FString UGumboObject::GetAttributeValue(E_GumboTag tag, FString name)
+UGumboObject* UGumboObject::Parse(FString HTML_Data)
+{
+	UGumboObject* obj = NewObject<UGumboObject>();
+	obj->GumboPureObject->Parse(HTML_Data);
+	return obj;
+}
+
+const FGumboAttribute UGumboObject::GetAttribute(E_GumboTag tag, FString name)
 {
 	if (GumboPureObject.IsValid()) 
 	{
-		if (GumboPureObject->GumboObject) 
+		if (GumboPureObject->GumboObject != nullptr) 
 		{
 			GumboNode* root = GumboPureObject->GumboObject->root;
 			const char* name_utf8 = TCHAR_TO_UTF8(*name);
 
-			const char* value = GetAttributeValueInNode(root, (GumboTag)tag, name_utf8);
-			return FString(value);
+			GumboAttribute* attribute = GetAttributeInNode(root, (GumboTag)tag, name_utf8);
+			const FGumboAttribute attributeStr(attribute, this);
+			return attributeStr;
 		}
 	}
-	return FString("NONE");
+	return FGumboAttribute{};
 }
-#pragma optimize("", off)
-static const char* GetAttributeValueInNode(GumboNode* node, GumboTag tag, const char* attributeName) {
+						 
+static GumboAttribute* GetAttributeInNode(GumboNode* node, GumboTag tag, const char* attributeName) {
 	if (node->type != GUMBO_NODE_ELEMENT) {
 		return nullptr;
 	}
@@ -40,20 +43,27 @@ static const char* GetAttributeValueInNode(GumboNode* node, GumboTag tag, const 
 	attribute = gumbo_get_attribute(&node->v.element.attributes, attributeName);
 	if (node->v.element.tag == tag && attribute != nullptr)
 	{
-		return attribute->value;
+		return attribute;
 	}
 
 	GumboVector* children = &node->v.element.children;
 	for (unsigned int i = 0; i < children->length; ++i) {
-		const char* value = GetAttributeValueInNode(static_cast<GumboNode*>(children->data[i]), tag, attributeName);
+		attribute = GetAttributeInNode(static_cast<GumboNode*>(children->data[i]), tag, attributeName);
 
-		if (value != nullptr) 
+		if (attribute != nullptr)
 		{
-			return value;
+			return attribute;
 		}
-
 	}
 	return nullptr;
 }
 
-#pragma optimize("", on)
+FGumboAttribute::FGumboAttribute(GumboAttribute* attribute, UGumboObject* gumboObject)
+{
+	if (attribute != nullptr && gumboObject != nullptr) 
+	{
+		Name = FString{ attribute->name };
+		Value = FString{ attribute->value };
+		GumboObject = gumboObject;
+	}
+}
