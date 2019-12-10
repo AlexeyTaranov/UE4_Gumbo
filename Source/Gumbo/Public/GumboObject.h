@@ -40,8 +40,8 @@ public:
 	TSharedPtr<class FGumboPure> GumboPureObject;
 
 	UFUNCTION(BlueprintCallable)
-	static UGumboObject* Parse(FString HTML_Data);
+	static UGumboObject* Parse(const FString& HTML_Data);
 
 	UFUNCTION(BlueprintCallable)
-	const FGumboAttribute GetAttribute(E_GumboTag tag, FString name);
+	FGumboAttribute GetAttribute(E_GumboTag tag, const FString& name);
 };

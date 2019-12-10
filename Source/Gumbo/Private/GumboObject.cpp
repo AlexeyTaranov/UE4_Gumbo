@@ -11,14 +11,14 @@ UGumboObject::UGumboObject()
 	GumboPureObject = MakeShared<FGumboPure>();
 }
 
-UGumboObject* UGumboObject::Parse(FString HTML_Data)
+UGumboObject* UGumboObject::Parse(const FString& HTML_Data)
 {
 	UGumboObject* obj = NewObject<UGumboObject>();
 	obj->GumboPureObject->Parse(HTML_Data);
 	return obj;
 }
 
-const FGumboAttribute UGumboObject::GetAttribute(E_GumboTag tag, FString name)
+FGumboAttribute UGumboObject::GetAttribute(E_GumboTag tag, const FString& name)
 {
 	if (GumboPureObject.IsValid()) 
 	{

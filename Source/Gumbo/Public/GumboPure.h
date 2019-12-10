@@ -15,7 +15,7 @@ public:
 	FGumboPure();
 	~FGumboPure();
 
-	void Parse(FString data);
+	void Parse(const FString& data);
 
 	GumboOutput* GumboObject;
 };
