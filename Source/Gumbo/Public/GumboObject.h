@@ -47,10 +47,10 @@ public:
 	FGumboNode GetNodeByAttributeValueAndName(E_GumboTag tag, const FString& name,
 		const FString& value, const FGumboNode& startNode,bool searchRecursive = true);
 
-	UFUNCTION(BlueprintPure)
+	UFUNCTION(BlueprintCallable, BlueprintPure)
 	bool IsGumboObjectFromThisNode(const FGumboNode& node);
 
-	UFUNCTION(BlueprintGetter)
+	UFUNCTION(BlueprintCallable,BlueprintPure)
 	FGumboNode GetRootNode();
 
 	UFUNCTION(BlueprintCallable)

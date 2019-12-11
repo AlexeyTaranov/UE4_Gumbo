@@ -27,7 +27,7 @@ static GumboNode* GetPureNodeByAttributeNameAndValue(GumboNode* node, GumboTag t
 
 	GumboVector* children = &node->v.element.children;
 
-	if (!searchRecursive && recursiveDepth != 0) 
+	if (recursiveDepth != 0) 
 	{
 		//Recursive search in children nodes
 		for (unsigned int i = 0; i < children->length; ++i) {
@@ -53,7 +53,7 @@ static GumboNode* GetPureNodeByTag(GumboNode* node, GumboTag tag, bool searchRec
 
 	GumboVector* children = &node->v.element.children;
 
-	if (!searchRecursive && recursiveDepth != 0)
+	if (recursiveDepth != 0)
 	{
 		//Recursive search in children nodes
 		for (unsigned int i = 0; i < children->length; ++i) {
@@ -104,7 +104,7 @@ FGumboNode UGumboObject::GetNodeByTag(E_GumboTag tag, const FGumboNode& startNod
 {
 	if(!startNode.IsValidForGumbo(this) || !IsValidGumboPure()) return FGumboNode{};
 	GumboNode* firstNode = startNode.Node;
-	GumboNode* target = GetPureNodeByTag(firstNode, (GumboTag)tag, searchRecursive);
+	GumboNode* target = GetPureNodeByTag(firstNode, static_cast<GumboTag>(tag), searchRecursive);
 	return FGumboNode(this, target);
 }
 
@@ -115,7 +115,7 @@ FGumboNode UGumboObject::GetNodeByAttributeValueAndName(E_GumboTag tag, const FS
 	GumboNode* firstNode = startNode.Node;
 	const char* name_utf8 = TCHAR_TO_UTF8(*name);
 	const char* value_urf8 = TCHAR_TO_UTF8(*value);
-	GumboNode* target = GetPureNodeByAttributeNameAndValue(firstNode, (GumboTag)tag, name_utf8,
+	GumboNode* target = GetPureNodeByAttributeNameAndValue(firstNode, static_cast<GumboTag>(tag), name_utf8,
 		value_urf8, searchRecursive);
 	FGumboNode node(this, target);
 	return node;
@@ -136,7 +136,7 @@ FGumboNode UGumboObject::GetRootNode()
 FString UGumboObject::GetTextFromNode(const FGumboNode &node)
 {
 	if (!IsValidGumboPure() || !node.IsValidForGumbo(this)) return FString();
-	if (node.Node->type != GumboNodeType::GUMBO_NODE_TEXT) return FString();
+	if (node.Node->type != GumboNodeType::GUMBO_NODE_ELEMENT) return FString();
 	const char* text = node.Node->v.text.text;
 	return FString(text);
 }
