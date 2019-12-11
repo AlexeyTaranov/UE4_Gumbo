@@ -136,6 +136,7 @@ FGumboNode UGumboObject::GetRootNode()
 FString UGumboObject::GetTextFromNode(const FGumboNode &node)
 {
 	if (!IsValidGumboPure() || !node.IsValidForGumbo(this)) return FString();
+	if (node.Node->type != GumboNodeType::GUMBO_NODE_TEXT) return FString();
 	const char* text = node.Node->v.text.text;
 	return FString(text);
 }
