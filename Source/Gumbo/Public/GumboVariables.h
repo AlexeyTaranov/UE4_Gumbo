@@ -172,26 +172,3 @@ enum class E_GumboTag : uint8
 	// Also used as the terminator for varargs functions that take tags.
 	GUMBO_TAG_LAST
 };
-
-UENUM(BlueprintType)
-enum class E_GumboNode : uint8 
-{
-	/** Document node.  v will be a GumboDocument. */
-	GUMBO_NODE_DOCUMENT,
-	/** Element node.  v will be a GumboElement. */
-	GUMBO_NODE_ELEMENT,
-	/** Text node.  v will be a GumboText. */
-	GUMBO_NODE_TEXT,
-	/** CDATA node. v will be a GumboText. */
-	GUMBO_NODE_CDATA,
-	/** Comment node.  v will be a GumboText, excluding comment delimiters. */
-	GUMBO_NODE_COMMENT,
-	/** Text node, where all contents is whitespace.  v will be a GumboText. */
-	GUMBO_NODE_WHITESPACE,
-	/** Template node.  This is separate from GUMBO_NODE_ELEMENT because many
-	 * client libraries will want to ignore the contents of template nodes, as
-	 * the spec suggests.  Recursing on GUMBO_NODE_ELEMENT will do the right thing
-	 * here, while clients that want to include template contents should also
-	 * check for GUMBO_NODE_TEMPLATE.  v will be a GumboElement.  */
-	GUMBO_NODE_TEMPLATE
-};

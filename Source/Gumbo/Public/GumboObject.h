@@ -9,24 +9,20 @@
 #include "GumboObject.generated.h"
 
 USTRUCT(BlueprintType)
-struct FGumboAttribute 
+struct FGumboNode
 {
 	GENERATED_USTRUCT_BODY()
 
 public:
-	FGumboAttribute() {};
-	FGumboAttribute(GumboAttribute* attribute, class UGumboObject* gumboObject);
+	FGumboNode();
+	FGumboNode(class UGumboObject* gumboObject, GumboNode* node);
 
 	UPROPERTY(BlueprintReadOnly)
-	FString Name;
+	class UGumboObject* GumboObject;
 
-	UPROPERTY(BlueprintReadOnly)
-	FString Value;
-
-	UPROPERTY()
-	UGumboObject* GumboObject;
+	//This node used in GumboObject
+	GumboNode* Node;
 };
-
 /**
  * 
  */
@@ -34,7 +30,6 @@ UCLASS(Blueprintable,BlueprintType)
 class GUMBO_API UGumboObject : public UObject
 {
 	GENERATED_BODY()
-
 public:
 	UGumboObject();
 	TSharedPtr<class FGumboPure> GumboPureObject;
@@ -43,5 +38,11 @@ public:
 	static UGumboObject* Parse(const FString& HTML_Data);
 
 	UFUNCTION(BlueprintCallable)
-	FGumboAttribute GetAttribute(E_GumboTag tag, const FString& name);
+	FGumboNode GetNodeInNodeByAttributeValue(E_GumboTag tag, const FString& name,
+		const FString& value, const FGumboNode& startNode);
+
+	UFUNCTION(BlueprintCallable)
+	FGumboNode GetNodeInRootByAttributeValue(E_GumboTag tag, const FString& name,
+		const FString& value);
 };
+
