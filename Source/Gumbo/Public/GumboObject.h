@@ -44,5 +44,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	FGumboNode GetNodeInRootByAttributeValue(E_GumboTag tag, const FString& name,
 		const FString& value);
+
+	UFUNCTION(BlueprintPure)
+	bool IsGumboObjectFromThisNode(const FGumboNode& node);
 };
 
