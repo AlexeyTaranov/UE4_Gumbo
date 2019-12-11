@@ -23,7 +23,7 @@ public:
 	//This node used in GumboObject
 	GumboNode* Node;
 
-	bool IsValid(UGumboObject* gummboObject) const;
+	bool IsValidForGumbo(UGumboObject* gummboObject) const;
 };
 /**
  * 
@@ -40,11 +40,12 @@ public:
 	static UGumboObject* Parse(const FString& HTML_Data);
 
 	UFUNCTION(BlueprintCallable)
-	FGumboNode GetNodeByTag(E_GumboTag tag, const FGumboNode& startNode);
+	FGumboNode GetNodeByTag(E_GumboTag tag, const FGumboNode& startNode,
+		bool searchRecursive = true);
 
 	UFUNCTION(BlueprintCallable)
 	FGumboNode GetNodeByAttributeValueAndName(E_GumboTag tag, const FString& name,
-		const FString& value, const FGumboNode& startNode);
+		const FString& value, const FGumboNode& startNode,bool searchRecursive = true);
 
 	UFUNCTION(BlueprintPure)
 	bool IsGumboObjectFromThisNode(const FGumboNode& node);
@@ -52,7 +53,10 @@ public:
 	UFUNCTION(BlueprintGetter)
 	FGumboNode GetRootNode();
 
+	UFUNCTION(BlueprintCallable)
+	FString GetTextFromNode(const FGumboNode& node);
+
 private:
-	bool IsValid();
+	bool IsValidGumboPure() const;
 };
 
