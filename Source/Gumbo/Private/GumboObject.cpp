@@ -186,13 +186,15 @@ FString UGumboObject::GetTextFromNode(const FGumboNode& node)
 {
 	if (!IsValidGumboPure() || !node.IsValidForGumbo(this)) return FString();
 	if (node.Node->type != GumboNodeType::GUMBO_NODE_ELEMENT) return FString();
-	const char* text = node.Node->v.text.text;
+	GumboVector* childs = &node.Node->v.element.children;
+	GumboNode* textNode = static_cast<GumboNode*>(childs->data[0]);
+	const char* text = textNode->v.text.text;
 	return FString(text);
 }
 
 FString UGumboObject::GetAttributeValue(const FGumboNode& node, const FString& attributeName)
 {
-	if (IsValidGumboPure() || !node.IsValidForGumbo(this)) return FString();
+	if (!IsValidGumboPure() || !node.IsValidForGumbo(this)) return FString();
 	const char* attrName_utf8 = TCHAR_TO_UTF8(*attributeName);
 	GumboAttribute* target = gumbo_get_attribute(&node.Node->v.element.attributes, attrName_utf8);
 	if (!target) return FString();
