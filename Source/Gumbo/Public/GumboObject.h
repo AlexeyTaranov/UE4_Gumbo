@@ -40,12 +40,21 @@ public:
 	static UGumboObject* Parse(const FString& HTML_Data);
 
 	UFUNCTION(BlueprintCallable)
-	FGumboNode GetNodeByTag(E_GumboTag tag, const FGumboNode& startNode,
+	FGumboNode FindNodeByTag(E_GumboTag tag, const FGumboNode& startNode,
 		bool searchRecursive = true);
 
 	UFUNCTION(BlueprintCallable)
-	FGumboNode GetNodeByAttributeValueAndName(E_GumboTag tag, const FString& name,
-		const FString& value, const FGumboNode& startNode,bool searchRecursive = true);
+	FGumboNode FindNodeByAttributeValueAndName(E_GumboTag tag, const FString& name,
+		const FGumboNode& startNode, const FString& value = "",bool searchRecursive = true);
+
+	UFUNCTION(BlueprintCallable)
+	FGumboNode FindNodeByTagPath(TArray<E_GumboTag> tagPath, const FGumboNode& startNode);
+	
+	UFUNCTION(BlueprintCallable)
+	FGumboNode GetChildren(const FGumboNode& node, int number);
+
+	UFUNCTION(BlueprintCallable)
+	TArray<FGumboNode> GetChildrens(const FGumboNode& node);
 
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	bool IsGumboObjectFromThisNode(const FGumboNode& node);
@@ -55,6 +64,9 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	FString GetTextFromNode(const FGumboNode& node);
+
+	UFUNCTION(BlueprintCallable)
+	FString GetAttributeValue(const FGumboNode& node, const FString& attributeName);
 
 private:
 	bool IsValidGumboPure() const;
