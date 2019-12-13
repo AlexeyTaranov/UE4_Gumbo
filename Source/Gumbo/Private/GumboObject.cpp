@@ -5,7 +5,7 @@
 #include "GumboNative.h"
 
 #pragma region GumboLibraryFunctions
-static GumboNode* GetNativeNodeByAttributeNameAndValue(GumboNode* node, GumboTag tag,
+static const GumboNode* GetNativeNodeByAttributeNameAndValue(const GumboNode* node, GumboTag tag,
 	const char* attributeName, const char* attributeValue, bool searchRecursive)
 {
 	if (node->type != GUMBO_NODE_ELEMENT) return nullptr;
@@ -14,7 +14,7 @@ static GumboNode* GetNativeNodeByAttributeNameAndValue(GumboNode* node, GumboTag
 	//Search in this node and child node
 	if (!searchRecursive) --recursiveDepth;
 
-	GumboAttribute* attribute;
+	const GumboAttribute* attribute;
 	attribute = gumbo_get_attribute(&node->v.element.attributes, attributeName);
 
 	if (attribute != nullptr)
@@ -28,7 +28,7 @@ static GumboNode* GetNativeNodeByAttributeNameAndValue(GumboNode* node, GumboTag
 		if (IsEqualAttributes && node->v.element.tag == tag) return node;
 	}
 
-	GumboVector* childrens = &node->v.element.children;
+	const GumboVector* childrens = &node->v.element.children;
 
 	if (recursiveDepth != 0) 
 	{
@@ -44,7 +44,7 @@ static GumboNode* GetNativeNodeByAttributeNameAndValue(GumboNode* node, GumboTag
 	return nullptr;
 }
 
-static GumboNode* GetNativeNodeByTag(GumboNode* node, GumboTag tag, bool searchRecursive)
+static const GumboNode* GetNativeNodeByTag(const GumboNode* node, GumboTag tag, bool searchRecursive)
 {
 	if (node->type != GUMBO_NODE_ELEMENT) return nullptr;
 
@@ -54,7 +54,7 @@ static GumboNode* GetNativeNodeByTag(GumboNode* node, GumboTag tag, bool searchR
 
 	if (node->v.element.tag == tag) return node;
 
-	GumboVector* childrens = &node->v.element.children;
+	const GumboVector* childrens = &node->v.element.children;
 
 	if (recursiveDepth != 0)
 	{
@@ -68,12 +68,12 @@ static GumboNode* GetNativeNodeByTag(GumboNode* node, GumboTag tag, bool searchR
 	return nullptr;
 }
 
-static GumboNode* GetNativeNodeByTagPath(GumboNode* node,TArray<E_GumboTag> path, unsigned int count)
+static const GumboNode* GetNativeNodeByTagPath(const GumboNode* node,TArray<E_GumboTag> path, unsigned int count)
 {
 	if (node->type != GUMBO_NODE_ELEMENT) return nullptr;
 	if (count >(unsigned int) path.Num()-1) return nullptr;
 	if (!node->v.element.tag == (GumboTag)path[count]) return nullptr;
-	GumboVector* childrens = &node->v.element.children;
+	const GumboVector* childrens = &node->v.element.children;
 	for (unsigned int i = 0; i < childrens->length; ++i) 
 	{
 		++count;
@@ -86,7 +86,7 @@ static GumboNode* GetNativeNodeByTagPath(GumboNode* node,TArray<E_GumboTag> path
 #pragma endregion
 
 #pragma region Structs
-FGumboNode::FGumboNode(UGumboObject* gumboObject, GumboNode* node, const FString& name) :
+FGumboNode::FGumboNode(UGumboObject* gumboObject,const GumboNode* node, const FString& name) :
 	GumboObject(gumboObject), Node(node), Name(name) {}
 FGumboNode::FGumboNode() {}
 
@@ -120,8 +120,8 @@ FGumboNode UGumboObject::FindNodeByTag(E_GumboTag tag, const FGumboNode& startNo
 	bool searchRecursive,const FString& resultNodeName)
 {
 	if(!startNode.IsValidForGumbo(this) || !IsValidNativeGumbo()) return FGumboNode{};
-	GumboNode* firstNode = startNode.Node;
-	GumboNode* target = GetNativeNodeByTag(firstNode, static_cast<GumboTag>(tag), searchRecursive);
+	const GumboNode* firstNode = startNode.Node;
+	const GumboNode* target = GetNativeNodeByTag(firstNode, static_cast<GumboTag>(tag), searchRecursive);
 	return FGumboNode{ this, target, resultNodeName };
 }
 
@@ -129,10 +129,10 @@ FGumboNode UGumboObject::FindNodeByAttributeValueAndName(E_GumboTag tag, const F
 	const FGumboNode& startNode, const FString& value, bool searchRecursive, const FString& resultNodeName)
 {
 	if (!startNode.IsValidForGumbo(this) || !IsValidNativeGumbo()) return FGumboNode{};
-	GumboNode* firstNode = startNode.Node;
+	const GumboNode* firstNode = startNode.Node;
 	const char* name_utf8 = TCHAR_TO_UTF8(*name);
 	const char* value_urf8 = TCHAR_TO_UTF8(*value);
-	GumboNode* target = GetNativeNodeByAttributeNameAndValue(firstNode, static_cast<GumboTag>(tag), name_utf8,
+	const GumboNode* target = GetNativeNodeByAttributeNameAndValue(firstNode, static_cast<GumboTag>(tag), name_utf8,
 		value_urf8, searchRecursive);
 	FGumboNode node{ this, target,resultNodeName };
 	return node;
@@ -142,7 +142,7 @@ FGumboNode UGumboObject::FindNodeByTagPath(TArray<E_GumboTag> tagPath, const FGu
 	const FString& resultNodeName)
 {
 	if (!IsValidNativeGumbo() || !startNode.IsValidForGumbo(this)) return FGumboNode{};
-	GumboNode* targetNode = GetNativeNodeByTagPath(startNode.Node, tagPath, 0);
+	const GumboNode* targetNode = GetNativeNodeByTagPath(startNode.Node, tagPath, 0);
 	return FGumboNode{ this,targetNode,resultNodeName };
 }
 
@@ -164,7 +164,7 @@ TArray<FGumboNode> UGumboObject::GetChildrens(const FGumboNode& node, const FStr
 {
 	if (!IsValidNativeGumbo() || !node.IsValidForGumbo(this)) return TArray<FGumboNode>();
 	TArray<FGumboNode> targetChilds;
-	GumboVector* childrens = &node.Node->v.element.children;
+	const GumboVector* childrens = &node.Node->v.element.children;
 	targetChilds.Reserve(childrens->length);
 	for (unsigned int i = 0; i < childrens->length; ++i)
 	{
@@ -195,13 +195,13 @@ FString UGumboObject::GetTextFromNode(const FGumboNode& node)
 {
 	if (!IsValidNativeGumbo() || !node.IsValidForGumbo(this)) return FString{};
 	if (node.Node->type != GumboNodeType::GUMBO_NODE_ELEMENT) return FString{};
-	GumboVector* childs = &node.Node->v.element.children;
+	const GumboVector* childs = &node.Node->v.element.children;
 	if (childs->length <= 0)
 	{
 		UE_LOG(LogTemp,Warning,TEXT("%s on node hasn't childs"),*(GetFullName()))
 		return FString{};
 	}
-	GumboNode* textNode = static_cast<GumboNode*>(childs->data[0]);
+	const GumboNode* textNode = static_cast<GumboNode*>(childs->data[0]);
 	const char* text = textNode->v.text.text;
 	return FString{ text };
 }

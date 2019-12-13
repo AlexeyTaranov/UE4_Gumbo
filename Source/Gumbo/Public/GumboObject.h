@@ -15,7 +15,7 @@ struct FGumboNode
 
 public:
 	FGumboNode();
-	FGumboNode(class UGumboObject* gumboObject, GumboNode* node,const FString& name);
+	FGumboNode(class UGumboObject* gumboObject,const GumboNode* node,const FString& name);
 
 	UPROPERTY(BlueprintReadWrite)
 	FString Name;
@@ -24,7 +24,7 @@ public:
 	class UGumboObject* GumboObject;
 
 	//This node used in GumboObject
-	GumboNode* Node;
+	const GumboNode* Node;
 
 	bool IsValidForGumbo(UGumboObject* gummboObject) const;
 };
