@@ -9,11 +9,12 @@ typedef GumboInternalOutput GumboOutput;
 /**
  * 
  */
-class GUMBO_API FGumboPure
+//TODO rename to NativeGumbo
+class GUMBO_API FGumboNative
 {
 public:
-	FGumboPure();
-	~FGumboPure();
+	FGumboNative();
+	~FGumboNative();
 
 	void Parse(const FString& data);
 

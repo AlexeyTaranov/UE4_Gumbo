@@ -15,7 +15,10 @@ struct FGumboNode
 
 public:
 	FGumboNode();
-	FGumboNode(class UGumboObject* gumboObject, GumboNode* node);
+	FGumboNode(class UGumboObject* gumboObject, GumboNode* node,const FString& name);
+
+	UPROPERTY(BlueprintReadWrite)
+	FString Name;
 
 	UPROPERTY(BlueprintReadOnly)
 	class UGumboObject* GumboObject;
@@ -34,27 +37,31 @@ class GUMBO_API UGumboObject : public UObject
 	GENERATED_BODY()
 public:
 	UGumboObject();
-	TSharedPtr<class FGumboPure> GumboPureObject;
+	TSharedPtr<class FGumboNative> GumboNativeObject;
 
 	UFUNCTION(BlueprintCallable)
 	static UGumboObject* Parse(const FString& HTML_Data);
 
 	UFUNCTION(BlueprintCallable)
 	FGumboNode FindNodeByTag(E_GumboTag tag, const FGumboNode& startNode,
-		bool searchRecursive = true);
+		bool searchRecursive = true,const FString& resultNodeName = "node");
 
 	UFUNCTION(BlueprintCallable)
 	FGumboNode FindNodeByAttributeValueAndName(E_GumboTag tag, const FString& name,
-		const FGumboNode& startNode, const FString& value = "",bool searchRecursive = true);
+		const FGumboNode& startNode, const FString& value = "",
+		bool searchRecursive = true,const FString& resultNodeName = "node");
 
 	UFUNCTION(BlueprintCallable)
-	FGumboNode FindNodeByTagPath(TArray<E_GumboTag> tagPath, const FGumboNode& startNode);
+	FGumboNode FindNodeByTagPath(TArray<E_GumboTag> tagPath, const FGumboNode& startNode,
+		const FString& resultNodeName = "node");
 	
 	UFUNCTION(BlueprintCallable)
-	FGumboNode GetChildren(const FGumboNode& node, int number);
+	FGumboNode GetChildren(const FGumboNode& node, int number,
+		const FString& resultNodeBaseName = "child_of_");
 
 	UFUNCTION(BlueprintCallable)
-	TArray<FGumboNode> GetChildrens(const FGumboNode& node);
+	TArray<FGumboNode> GetChildrens(const FGumboNode& node,
+		const FString& resultNodeBaseName = "child_of_");
 
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	bool IsGumboObjectFromThisNode(const FGumboNode& node);
@@ -69,6 +76,6 @@ public:
 	FString GetAttributeValue(const FGumboNode& node, const FString& attributeName);
 
 private:
-	bool IsValidGumboPure() const;
+	bool IsValidNativeGumbo() const;
 };
 
