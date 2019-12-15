@@ -18,11 +18,6 @@ public class GumboLibrary : ModuleRules
         get { return ModuleDirectory; }
     }
 
-    private string BinariesPath
-    {
-        get { return Path.GetFullPath(Path.Combine(ModulePath, "../Binaries/")); }
-    }
-
 
     public bool LoadGumbo(ReadOnlyTargetRules target)
     {
