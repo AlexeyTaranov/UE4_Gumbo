@@ -15,10 +15,7 @@ struct FGumboNode
 
 public:
 	FGumboNode();
-	FGumboNode(class UGumboObject* gumboObject,const GumboNode* node,const FString& name);
-
-	UPROPERTY(BlueprintReadWrite)
-	FString Name;
+	FGumboNode(class UGumboObject* gumboObject,const GumboNode* node);
 
 	UPROPERTY(BlueprintReadOnly)
 	class UGumboObject* GumboObject;
@@ -40,31 +37,24 @@ public:
 	TSharedPtr<class FGumboNative> GumboNativeObject;
 
 	UFUNCTION(BlueprintCallable)
-	static UGumboObject* Parse(const FString& HTML_Data);
+	static UGumboObject* ConstructGumboParser(const FString& HTML_Data);
 
 	UFUNCTION(BlueprintCallable)
-	FGumboNode FindNodeByTag(E_GumboTag tag, const FGumboNode& startNode,
-		bool searchRecursive = true,const FString& resultNodeName = "node");
+	FGumboNode GetNodeByTag(E_GumboTag tag, const FGumboNode& startNode,
+		bool searchRecursive = true);
 
 	UFUNCTION(BlueprintCallable)
-	FGumboNode FindNodeByAttributeValueAndName(E_GumboTag tag, const FString& name,
-		const FGumboNode& startNode, const FString& value = "",
-		bool searchRecursive = true,const FString& resultNodeName = "node");
-
-	UFUNCTION(BlueprintCallable)
-	FGumboNode FindNodeByTagPath(TArray<E_GumboTag> tagPath, const FGumboNode& startNode,
-		const FString& resultNodeName = "node");
+	FGumboNode GetNodeByAttributeValueAndName(E_GumboTag tag, const FString& name,
+		const FGumboNode& startNode, const FString& value = "", bool searchRecursive = true);
 	
 	UFUNCTION(BlueprintCallable)
-	FGumboNode GetChildren(const FGumboNode& node, int number,
-		const FString& resultNodeBaseName = "child_of_");
+	FGumboNode GetChildren(const FGumboNode& node, int number);
 
 	UFUNCTION(BlueprintCallable)
-	TArray<FGumboNode> GetChildrens(const FGumboNode& node,
-		const FString& resultNodeBaseName = "child_of_");
+	TArray<FGumboNode> GetChildrens(const FGumboNode& node);
 
 	UFUNCTION(BlueprintCallable, BlueprintPure)
-	bool IsGumboObjectFromThisNode(const FGumboNode& node);
+	bool IsHaveNode(const FGumboNode& node);
 
 	UFUNCTION(BlueprintCallable,BlueprintPure)
 	FGumboNode GetRootNode();
