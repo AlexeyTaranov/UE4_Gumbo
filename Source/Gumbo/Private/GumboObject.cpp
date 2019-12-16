@@ -73,7 +73,7 @@ static const GumboNode* GetNativeNodeByTag(const GumboNode* node, GumboTag tag, 
 #pragma region Structs
 FGumboNode::FGumboNode(UGumboObject* gumboObject,const GumboNode* node) :
 	GumboObject(gumboObject), Node(node){}
-FGumboNode::FGumboNode() {}
+FGumboNode::FGumboNode():GumboObject(nullptr) {}
 
 bool FGumboNode::IsValidForGumbo(UGumboObject* gumboObject) const
 {
@@ -89,12 +89,11 @@ bool FGumboNode::IsValidForGumbo(UGumboObject* gumboObject) const
 #pragma endregion
 
 
-UGumboObject::UGumboObject()
+UGumboObject::UGumboObject():GumboNativeObject(MakeShared<FGumboNative>())
 {
-	GumboNativeObject = MakeShared<FGumboNative>();
 }
 
-UGumboObject* UGumboObject::ConstructGumboParser(const FString& HTML_Data)
+UGumboObject* UGumboObject::ConstructGumboParserFromString(const FString& HTML_Data)
 {
 	UGumboObject* obj = NewObject<UGumboObject>();
 	obj->GumboNativeObject->Parse(HTML_Data);
