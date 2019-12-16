@@ -17,7 +17,7 @@ public:
 	FGumboNode();
 	FGumboNode(class UGumboObject* gumboObject,const GumboNode* node);
 
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly, Category = "GumboParser")
 	class UGumboObject* GumboObject;
 
 	//This node used in GumboObject
@@ -36,33 +36,33 @@ public:
 	UGumboObject();
 	TSharedPtr<class FGumboNative> GumboNativeObject;
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "GumboParser")
 	static UGumboObject* ConstructGumboParser(const FString& HTML_Data);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "GumboParser")
 	FGumboNode GetNodeByTag(E_GumboTag tag, const FGumboNode& startNode,
 		bool searchRecursive = true);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "GumboParser")
 	FGumboNode GetNodeByAttributeValueAndName(E_GumboTag tag, const FString& name,
 		const FGumboNode& startNode, const FString& value = "", bool searchRecursive = true);
 	
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "GumboParser")
 	FGumboNode GetChildren(const FGumboNode& node, int number);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "GumboParser")
 	TArray<FGumboNode> GetChildrens(const FGumboNode& node);
 
-	UFUNCTION(BlueprintCallable, BlueprintPure)
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "GumboParser")
 	bool IsHaveNode(const FGumboNode& node);
 
-	UFUNCTION(BlueprintCallable,BlueprintPure)
+	UFUNCTION(BlueprintCallable,BlueprintPure, Category = "GumboParser")
 	FGumboNode GetRootNode();
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "GumboParser")
 	FString GetTextFromNode(const FGumboNode& node);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "GumboParser")
 	FString GetAttributeValue(const FGumboNode& node, const FString& attributeName);
 
 private:
