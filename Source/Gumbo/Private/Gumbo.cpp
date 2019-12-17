@@ -3,7 +3,6 @@
 #include "Gumbo.h"
 #include "Core.h"
 #include "Modules/ModuleManager.h"
-#include "Interfaces/IPluginManager.h"
 
 #define LOCTEXT_NAMESPACE "FGumboModule"
 

@@ -28,10 +28,11 @@ public class Gumbo : ModuleRules
 		PublicDependencyModuleNames.AddRange(
 			new string[]
 			{
-				"Core",
+                "Core",
                 "CoreUObject",
+                "Engine",
+                "HTTP",
                 "GumboLibrary",
-				"Projects"
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);

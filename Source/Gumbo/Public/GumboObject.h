@@ -20,7 +20,6 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = "GumboParser")
 	class UGumboObject* GumboObject;
 
-	//This node used in GumboObject
 	const GumboNode* Node;
 
 	bool IsValidForGumbo(UGumboObject* gummboObject) const;
