@@ -3,8 +3,11 @@
 ------------
 
 ##### UE4 GumoParser is plugin for parsing HTML in editor with blueprints.
+
 Based on https://github.com/google/gumbo-parser
+
 Supported platform: **Win64 Editor**
+
 Support Version: **UE4.23**
 
 Features:
