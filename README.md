@@ -11,8 +11,11 @@ Supported platform: **Win64 Editor**
 Supported Version: **UE4.23**
 
 Features:
+
 -Parsing HTML by web or string
+
 -Work with nodes, attributes,values.
+
 
 Gumbo use CRT and this plugin can't use in runtime.
 
