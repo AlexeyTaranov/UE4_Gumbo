@@ -8,7 +8,7 @@ Based on https://github.com/google/gumbo-parser
 
 Supported platform: **Win64 Editor**
 
-Support Version: **UE4.23**
+Supported Version: **UE4.23**
 
 Features:
 -Parsing HTML by web or string
