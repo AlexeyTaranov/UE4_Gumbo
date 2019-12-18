@@ -13,7 +13,7 @@
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnGumboCreated, const UGumboObject*, CreatedObject);
 
 UCLASS()
-class GUMBO_API UGumboNetowkrBuilder : public UBlueprintAsyncActionBase
+class GUMBOPARSER_API UGumboNetowkrBuilder : public UBlueprintAsyncActionBase
 {
 	GENERATED_BODY()
 

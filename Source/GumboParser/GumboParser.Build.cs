@@ -2,11 +2,11 @@
 
 using UnrealBuildTool;
 
-public class Gumbo : ModuleRules
+public class GumboParser : ModuleRules
 {
 
 
-	public Gumbo(ReadOnlyTargetRules Target) : base(Target)
+	public GumboParser(ReadOnlyTargetRules Target) : base(Target)
 	{
         PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 		
@@ -32,7 +32,7 @@ public class Gumbo : ModuleRules
                 "CoreUObject",
                 "Engine",
                 "HTTP",
-                "GumboLibrary",
+                "GumboParserLibrary",
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);

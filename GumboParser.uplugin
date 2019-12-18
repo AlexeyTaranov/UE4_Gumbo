@@ -1,0 +1,26 @@
+{
+  "FileVersion": 3,
+  "Version": 1,
+  "VersionName": "1.0",
+  "FriendlyName": "GumboParser",
+  "Description": "HTML parser",
+  "Category": "Parser",
+  "CreatedBy": "Alexey Taranov",
+  "CreatedByURL": "https://github.com/AlexeyTaranov/UE4_Gumbo",
+  "DocsURL": "",
+  "MarketplaceURL": "",
+  "SupportURL": "https://github.com/AlexeyTaranov/UE4_Gumbo",
+  "CanContainContent": true,
+  "IsBetaVersion": true,
+  "Installed": false,
+  "Modules": [
+    {
+      "Name": "GumboParser",
+      "Type": "Editor",
+      "LoadingPhase": "Default",
+      "WhitelistPlatforms": [
+        "Win64"
+      ]
+    }
+  ]
+}

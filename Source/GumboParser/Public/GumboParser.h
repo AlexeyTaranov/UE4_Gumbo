@@ -4,7 +4,7 @@
 
 #include "Modules/ModuleManager.h"
 
-class FGumboModule : public IModuleInterface
+class FGumboParserModule : public IModuleInterface
 {
 public:
 

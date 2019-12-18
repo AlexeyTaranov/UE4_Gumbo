@@ -28,7 +28,7 @@ public:
  * 
  */
 UCLASS(Blueprintable,BlueprintType)
-class GUMBO_API UGumboObject : public UObject
+class GUMBOPARSER_API UGumboObject : public UObject
 {
 	GENERATED_BODY()
 public:

@@ -4,9 +4,9 @@ using System;
 using System.IO;
 using UnrealBuildTool;
 
-public class GumboLibrary : ModuleRules
+public class GumboParserLibrary : ModuleRules
 {
-    public GumboLibrary(ReadOnlyTargetRules Target) : base(Target)
+    public GumboParserLibrary(ReadOnlyTargetRules Target) : base(Target)
     {
         Type = ModuleType.External;
 

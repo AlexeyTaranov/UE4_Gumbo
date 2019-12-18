@@ -9,8 +9,7 @@ typedef GumboInternalOutput GumboOutput;
 /**
  * 
  */
-//TODO rename to NativeGumbo
-class GUMBO_API FGumboNative
+class GUMBOPARSER_API FGumboNative
 {
 public:
 	FGumboNative();
