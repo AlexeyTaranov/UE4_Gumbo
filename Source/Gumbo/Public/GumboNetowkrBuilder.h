@@ -18,7 +18,7 @@ class GUMBO_API UGumboNetowkrBuilder : public UBlueprintAsyncActionBase
 	GENERATED_BODY()
 
 	UFUNCTION(BlueprintCallable, Category = "GumboParser/Create")
-	static UGumboNetowkrBuilder* ConstructGumboParserByNetwork(const FString& URL,const FString& Request = TEXT("GET"));
+	static UGumboNetowkrBuilder* CreateGumboParserByNetwork(const FString& URL,const FString& Request = TEXT("GET"));
 
 	virtual void Activate() override;
 

@@ -4,7 +4,7 @@
 #include "GumboNetowkrBuilder.h"
 #include "GumboObject.h"
 
-UGumboNetowkrBuilder* UGumboNetowkrBuilder::ConstructGumboParserByNetwork(const FString& URL, const FString& Request)
+UGumboNetowkrBuilder* UGumboNetowkrBuilder::CreateGumboParserByNetwork(const FString& URL, const FString& Request)
 {
 	UGumboNetowkrBuilder* _netObj = NewObject<UGumboNetowkrBuilder>();
 	_netObj->_url = URL;
@@ -24,6 +24,6 @@ void UGumboNetowkrBuilder::Activate()
 
 void UGumboNetowkrBuilder::OnRequestComplete(FHttpRequestPtr Request, FHttpResponsePtr Response, bool bConnectedSuccessfully)
 {
-	UGumboObject* obj = UGumboObject::ConstructGumboParserFromString(Response->GetContentAsString());
+	UGumboObject* obj = UGumboObject::CreateGumboParserFromString(Response->GetContentAsString());
 	OnGumboByNetworkCreated.Broadcast(obj);
 }

@@ -93,7 +93,7 @@ UGumboObject::UGumboObject():GumboNativeObject(MakeShared<FGumboNative>())
 {
 }
 
-UGumboObject* UGumboObject::ConstructGumboParserFromString(const FString& HTML_Data)
+UGumboObject* UGumboObject::CreateGumboParserFromString(const FString& HTML_Data)
 {
 	UGumboObject* obj = NewObject<UGumboObject>();
 	obj->GumboNativeObject->Parse(HTML_Data);

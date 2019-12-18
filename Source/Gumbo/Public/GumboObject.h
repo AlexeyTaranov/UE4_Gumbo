@@ -36,7 +36,7 @@ public:
 	TSharedPtr<class FGumboNative> GumboNativeObject;
 
 	UFUNCTION(BlueprintCallable, Category = "GumboParser/Create")
-	static UGumboObject* ConstructGumboParserFromString(const FString& HTML_Data);
+	static UGumboObject* CreateGumboParserFromString(const FString& HTML_Data);
 
 	UFUNCTION(BlueprintCallable, Category = "GumboParser/Get")
 	FGumboNode GetNodeByTag(E_GumboTag tag, const FGumboNode& startNode,
