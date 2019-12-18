@@ -14,7 +14,7 @@ Features:
 
 -Parsing HTML by web or string
 
--Work with nodes, attributes.
+-Simple work with nodes, attributes.
 
 
 Gumbo use CRT and this plugin can't use in runtime.
