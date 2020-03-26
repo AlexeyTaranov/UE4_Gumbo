@@ -6,9 +6,11 @@
 
 Based on https://github.com/google/gumbo-parser
 
+[Start Guide](https://github.com/AlexeyTaranov/UE4_Gumbo/blob/StartGuide/StartGuide.md "Start Guide")
+
 Supported platform: **Win64 Editor**
 
-Supported Version: **UE4.23**
+Supported Version: **UE4.23-4.24**
 
 Features:
 
@@ -18,4 +20,3 @@ Features:
 
 
 Gumbo use CRT and this plugin can't use in runtime.
-
