@@ -2,6 +2,8 @@
 
 For installation put plugin to UE4 folder plugins.
 
+You can look examples in Content/Examples(branch StartGuide).
+
 ##### How to use:
 
 1. Get HTML page from network: you can use node Create Gumbo Parser by Network and fill URL field. On complete request will be created gumbo object.
