@@ -6,7 +6,11 @@
 #include "UObject/NoExportTypes.h"
 #include "GumboVariables.h"
 #include "gumbo-parser/include/gumbo.h"
+#include "GumboNative.h"
 #include "GumboObject.generated.h"
+
+
+class FGumboNative;
 
 USTRUCT(BlueprintType)
 struct FGumboNode
@@ -15,14 +19,14 @@ struct FGumboNode
 
 public:
 	FGumboNode();
-	FGumboNode(class UGumboObject* gumboObject,const GumboNode* node);
+	FGumboNode(UGumboObject* gumboObject,const GumboNode* node);
 
 	UPROPERTY(BlueprintReadOnly, Category = "GumboParser")
 	class UGumboObject* GumboObject;
 
 	const GumboNode* Node;
 
-	bool IsValidForGumbo(UGumboObject* gummboObject) const;
+	bool IsValidForGumbo(class UGumboObject* gummboObject) const;
 };
 /**
  * 
@@ -33,7 +37,7 @@ class GUMBOPARSER_API UGumboObject : public UObject
 	GENERATED_BODY()
 public:
 	UGumboObject();
-	TSharedPtr<class FGumboNative> GumboNativeObject;
+	TUniquePtr<FGumboNative> GumboNativeObject;
 
 	UFUNCTION(BlueprintCallable, Category = "GumboParser/Create")
 	static UGumboObject* CreateGumboParserFromString(const FString& HTML_Data);

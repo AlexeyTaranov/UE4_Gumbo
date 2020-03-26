@@ -2,7 +2,6 @@
 
 
 #include "GumboObject.h"
-#include "GumboNative.h"
 
 #pragma region GumboLibraryFunctions
 static const GumboNode* GetNativeNodeByAttributeNameAndValue(const GumboNode* node, GumboTag tag,
@@ -89,7 +88,7 @@ bool FGumboNode::IsValidForGumbo(UGumboObject* gumboObject) const
 #pragma endregion
 
 
-UGumboObject::UGumboObject():GumboNativeObject(MakeShared<FGumboNative>())
+UGumboObject::UGumboObject() :GumboNativeObject(MakeUnique<FGumboNative>() )
 {
 }
 

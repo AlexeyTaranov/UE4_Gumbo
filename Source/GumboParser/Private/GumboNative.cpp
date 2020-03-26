@@ -4,9 +4,8 @@
 #include "GumboNative.h"
 #include "gumbo-parser/include/gumbo.h"
 
-FGumboNative::FGumboNative()
+FGumboNative::FGumboNative(): GumboObject(nullptr)
 {
-	GumboObject = nullptr;
 }
 
 FGumboNative::~FGumboNative()
@@ -18,6 +17,11 @@ FGumboNative::~FGumboNative()
 
 void FGumboNative::Parse(const FString& data)
 {
+	if (GumboObject != nullptr)
+	{
+		gumbo_destroy_output(&kGumboDefaultOptions, GumboObject);
+	}
 	const char* data_utf8 = TCHAR_TO_UTF8(*data);
 	GumboObject = gumbo_parse(data_utf8);
 }
+
