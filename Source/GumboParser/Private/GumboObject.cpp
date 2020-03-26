@@ -123,6 +123,8 @@ FGumboNode UGumboObject::GetNodeByAttributeValueAndName(E_GumboTag tag, const FS
 
 FGumboNode UGumboObject::GetChildren(const FGumboNode& node, int number)
 {
+	//By Default Gumbo with 0 return self node
+	++number;
 	if (!IsValidNativeGumbo() || !node.IsValidForGumbo(this)) return FGumboNode{};
 	if ((unsigned int)number > (node.Node->v.element.children.length))
 	{
