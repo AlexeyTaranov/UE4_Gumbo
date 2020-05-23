@@ -10,6 +10,7 @@
 #include "GumboObject.generated.h"
 
 
+class UGumboObject;
 class FGumboNative;
 
 USTRUCT(BlueprintType)
