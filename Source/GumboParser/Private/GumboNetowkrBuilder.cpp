@@ -14,7 +14,7 @@ UGumboNetowkrBuilder* UGumboNetowkrBuilder::CreateGumboParserByNetwork(const FSt
 
 void UGumboNetowkrBuilder::Activate()
 {
-	TSharedRef<IHttpRequest> http = FHttpModule::Get().CreateRequest();
+	FHttpRequestRef http = FHttpModule::Get().CreateRequest();
 	http->SetURL(_url);
 	http->SetVerb(_request);
 	FHttpRequestCompleteDelegate& requestDelegate = http->OnProcessRequestComplete();
