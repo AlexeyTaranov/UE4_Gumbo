@@ -10,7 +10,7 @@ Based on https://github.com/google/gumbo-parser
 
 Supported platform: **Win64 Editor**
 
-Supported Version: **UE4.23-4.24**
+Supported Version: **UE4.23-4.26**
 
 Features:
 
