@@ -16,7 +16,7 @@ Features:
 
 -Parsing HTML by web or string
 
--Simple work with HTML nodes, attributes in BLueprints.
+-Simple work with HTML nodes, attributes in Blueprints.
 
 
 Gumbo use CRT and this plugin can't use in runtime.
